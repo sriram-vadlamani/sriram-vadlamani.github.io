@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Réponse automatique aux avis avec FairGuest</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <script src="js/nl2br.js"></script>
+    <script src="js/gpt_api.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/Review.js"></script>   
+    <script src="data/reviews.js"></script>  
+</head>
+
+<body>
+    <div class="container">
+        <h1>Réponse automatique aux avis avec FairGuest</h1>
+        <!-- Customer section -->
+        <article class="customer">
+            <!-- Select review-->
+            <section>
+                <select name="review_select" id="review_select">
+                    <option value="-1">Sélection d'un avis</option>
+                </select>
+                <p></p>
+                <div id="response_author"></div>
+                <div id="establishment_name"></div>
+
+            </section>
+            <!-- Review and custimler name -->
+            <section id="customer-review">
+                <h2>Avis de <span id="review_author"></span></h2>
+                <div id="avis"></div>
+            </section>
+
+            <!-- Rating -->
+            <section id="customer-rating">
+                <h2>Note <span id="rating"></span> / 10</h2>
+            </section>
+
+        </article>
+        <div id="button-first_response">
+            <div id="wait_for_api"></div>
+            <button id="generate" class="generate">Proposer une réponse</button>
+        </div>
+        <hr>
+        <!-- FairGuest response -->
+        <div id="response_area">
+            <h1>Propositions de réponse</h1>
+            <div id="response"></div>
+            <div id="button-response">
+                <button id="generate_next" class="generate">Proposer une nouvelle réponse</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/Response.js"></script>
+</body>
+
+</html>

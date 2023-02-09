@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>POC GPT-3 pour FairGuest</title>
+
+    <style>
+        .container {
+            margin: auto;
+            max-width: 1500px;
+        }
+
+        h1 {
+            background-color: #ccc;
+            padding: 10px;
+        }
+
+        .review_response {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: nowrap;
+        }
+
+        #generate {
+            background-color: purple;
+            color: white;
+            border-radius: 10px;
+            border: 1px solid white;
+            padding: 10px;
+        }
+
+        #clear {
+            background-color: lightsalmon;
+            color: black;
+            border-radius: 10px;
+            border: 1px solid white;
+            padding: 5px;
+        }
+
+        #add_context {
+            background-color: lightgreen;
+            color: black;
+            border-radius: 10px;
+            border: 1px solid white;
+            padding: 10px;
+        }
+
+        section:not(:last-child) {
+            margin-right: 40px;
+
+        }
+
+        .response-text {
+            margin-bottom: 10px;
+            border-radius: 10px;
+            background-color: #ccc;
+            padding: 20px
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        input[type=text],
+        textarea {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .response_section {
+            flex: 1
+        }
+
+        #wait_for_api {
+            border: 5px solid #ccc;
+            border-top: 5px solid purple;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 2s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #mhr_response {
+            width: 500px
+        }
+
+        #mhr_select {
+            padding: 10px;
+            border: 1 px solid purple;
+            background-color: #CCC;
+            font-weight: bold;
+        }
+
+        input[type="radio"].tone {
+            display: none;
+        }
+
+        input[type="radio"].tone+label {
+            padding: 0.3rem 0.5rem;
+            border: 1px dashed #ccc;
+        }
+
+        input[type="radio"].tone:checked+label {
+            background-color: plum;
+            border: 1px solid #000;
+        }
+    </style>
+
+    <script>
+        const mhr_review = [
+            {
+                "response_author": "Audrey Lassalle, Responsable d'Exploitation",
+                "establishment_name": "Sure Hotel by Best Western Biarritz Aéroport",
+                "global_context": "Souhaiter la bonne année.\nAjouter une formule de politesse en fin de réponse",
+                "local_context": "",
+                "season_greeting": false,
+                "review_author": "Pascal",
+                "review": "Chambre parfaitement nettoyée, jour après jour. Plein d'attentions pour le confort (notamment café ou thé). Chambre calme à proximité de l'aéroport, gare, supérette, boulangerie, centre ville). Literie confortable avec deux oreillers pour chacun. Climatisation au top. Accueil professionnel et avenant (jour/nuit).  Hôtel de très bonne tenue à recommander. Présence d'un restaurant. Bon rapport qualité/prix",
+                "mhr_response": "Cher Pascal,\nQuel plaisir de lire votre satisfaction !\nNous sommes ravis que votre séjour ait été à la hauteur de vos attentes et nous vous remercions vivement pour votre gentil commentaire.\nJe ne manquerai pas d'informer l'équipe de la note que vous nous avez attribué.\nToute l'équipe espère vous revoir bientôt et vous souhaite une très heureuse année 2023,\nAudrey Lassalle,\nResponsable d'Exploitation Sure Hotel by Best Western Biarritz Aéroport"
+            },
+            {
+                "response_author": "Benoit, propriétaire, gérant",
+                "establishment_name": "Brit Hôtel Florimont***",
+                "global_context": "Souhaiter la bonne année.\nAjouter une formule de politesse en fin de réponse.\nÉtablissement situé en Haute-Savoie.\nCuisine raffinée",
+                "local_context": "",
+                "season_greeting": false,
+                "review_author": "Marie-Alix",
+                "review": "Le restaurant est une petite pépite, nous y avons pris un excellent dîner, et le buffet du petit déjeuner est incroyable ! en revanche les chambres et lieu qui manquent un peu de charme",
+                "mhr_response": "Chère Marie-Alix,\nMerci de nous avoir choisis pour votre étape en Haute-Savoie.\nC'est avec grand plaisir que je découvre que ce séjour a été une parenthèse gourmande.\nJe transmets vos compliments au chef, qui sera enchanté de voir que sa cuisine raffinée vous a plu.\nVous ne savez pas à quel point votre remarque sur le petit-déjeuner me fait plaisir. Il semble que nous ayons comblé et même dépassé vos attentes avec notre buffet du terroir. Il est vrai qu'on ne manque pas de bonnes choses dans la région !\nNous vous souhaitons le meilleur pour 2023 et nous espérons que vous renouvellerez l'expérience prochainement. La carte évolue au fil des saisons, il y a toujours de nouvelles saveurs à découvrir ...\nÀ bientôt !\nBenoit, \nPropriétaire, gérant\nBrit Hôtel Florimont***"
+            },
+            {
+                "response_author": "Guillaume Raysseguier, directeur",
+                "establishment_name": "Chalet Alpen Valley - Mont Blanc",
+                "global_context": "Souhaiter une bonne année 2023.\nAjouter une formule de politesse en fin de réponse.\nNotre petit-déjeuner a été pensé comme une parenthèse de gourmandise avec un buffet froid et un buffet chaud particulièrement garni, des produits sucrés et salés pour que chacun trouve son bonheur.",
+                "local_context": "",
+                "season_greeting": false,
+                "review_author": "Pamokdjian",
+                "review": "Petit déjeuner quelconque, pas confiture maison, pas de salade fruits frais... Chambre (mal insonorisée. Ambiance froide, wc dans salle de douche)\nPas de lieu commun chaleureux, salle restaurant donne sur entrée, et salon aussi!",
+                "mhr_response": "Cher Monsieur, \nMerci pour ce retour d'expérience. \nQuel dommage de lire votre déception !\nNotre souhait le plus cher est de voir repartir nos hôtes avec le sourire jusqu'aux oreilles, des étoiles dans les yeux et plein de souvenirs en tête. \nNous avons lu vos remarques avec attention. Notre petit-déjeuner a été pensé comme une parenthèse de gourmandise avec un buffet froid et un buffet chaud particulièrement garni, des produits sucrés et salés pour que chacun trouve son bonheur. \nLe Chef est également disponible tous les matins pour vous offrir des petits plus sur mesure, sur simple demande. \nNous proposons bien une salade de fruits frais préparée sur place. \nNous aurions aimé savoir ce qui vous a manqué. \nNous avons été ravis de vous accueillir en cette période de fêtes et nous vous souhaitons nos meilleurs vœux pour 2023 ! \nGuillaume Raysseguier \nDirecteur Chalet Alpen Valley - Mont Blanc"
+            },
+            {
+                "response_author": "Frédérique Hanssens, directrice",
+                "establishment_name": "Best Western Plus Hôtel Le Conquérant",
+                "global_context": "",
+                "local_context": "",
+                "season_greeting": false,
+                "review_author": "Dufeu",
+                "review": "Positif : L'équipe de' hôtel. Négatif : Le manque de propositions de la totalité des plats sur le dîner",
+                "mhr_response": "Cher Monsieur, \nNous sommes heureux de lire que vous avez apprécié notre accueil et l'essentiel de nos prestations. \nNous prenons bonne note de votre remarque concernant notre service de restauration que nous cherchons à améliorer constamment. \nNous vous souhaitons nos meilleurs vœux. C'est avec joie que nous vous accueillerons pour un prochain séjour normand. \nFrédérique Hanssens, \nDirectrice, Best Western Plus Hôtel Le Conquérant"
+            },
+            {
+                "response_author": "Romain, directeur",
+                "establishment_name": "Hôtel L’Arboisie - Megève",
+                "global_context": "Il y a habituellement des plans de Megève",
+                "local_context": "",
+                "season_greeting": false,
+                "review_author": "Nicolas",
+                "review": "Belle hôtel étrangement à la réception pas de plan de Megève pour nous situé dans les activités à faire",
+                "mhr_response": "Cher Nicolas,Nous vous remercions pour votre avis sur notre hôtel à Megève.Comme vous l’avez constaté, L’Arboisie est un établissement convivial et chaleureux niché sur les hauteurs du village. Nous sommes désolés que vous n'ayez pas trouvé de plan de la ville à la réception. Nous nous excusons pour cet oubli et nous nous assurerons de mettre à disposition des plans de la région pour nos prochains clients. Si vous avez besoin de conseils pendant votre séjour, nos équipes sont toujours ravies de vous partager leurs endroits préférés.Merci encore pour votre commentaire, nous espérons vous revoir bientôt!Romain,Directeur de l’Hôtel L’Arboisie - Megève"
+            },
+            {
+                "response_author": "La direction",
+                "establishment_name": "Hôtel l'Univers - Angers",
+                "global_context": "Nous fournissons un sèche-cheveux sur simple demande.\nDes rénovations sont prévues pour l'année 2023.",
+                "local_context": "",
+                "season_greeting": false,
+                "review_author": "Karoll M.",
+                "review": "Très déçu, la chambre ne ce ressemble pas de tout  a ce qui propose Booking. La salle de bain même pas un parois de douche, pas de sèche cheveux...et la cerise sur le gâteau samedi 6hr un grand bruit dans les tuyaux où système d'évacuation.",
+                "mhr_response": "Chère Madame, \nVotre déception chagrine l'ensemble de l'équipe... \nNous essayons d'être les plus transparents possible sur nos prestations à travers les informations et les photos publiées sur notre site internet et sur les différentes plateformes de réservation. Nos équipes se tiennent également à votre disposition pour vous conseiller si le besoin s'en fait sentir. En ce qui concerne la chambre standard dans laquelle vous avez séjourné : sa salle de bain est fonctionnelle et nous fournissons un sèche-cheveux sur simple demande. Avec une sollicitation de votre part, nous aurions pu vous accompagner au mieux. Dans une logique d'amélioration permanente, des rénovations sont prévues pour l'année 2023. \nNous vous souhaitons de belles fêtes de fin d'année et nous espérons vous revoir dans notre agréable ville du Maine-et-Loire. \nLa direction\nHôtel l'Univers - Angers\n02 41 88 43 58"
+            },
+            {
+                "response_author": "Laura Barthez, directrice",
+                "establishment_name": "Best Western Hôtel St Exupéry Bordeaux Ouest 3*",
+                "global_context": "Chauffage d’appoint sur simple demande à la réception.\nUne empreinte bancaire pour la caution est prise à l'arrivée de nos hôtes pour les potentiels extras qui seraient consommés pendant votre séjour.\nCette dernière est rendue en fin de séjour s’il n'y a pas eu de consommation.",
+                "local_context": "",
+                "season_greeting": false,
+                "review_author": "Bertrand",
+                "review": "positif : Très propre. négatif : chambre sans chauffage ! pas informé du problème technique lors de la prise de chambre ... Caution de 50 euros, encaissée, sans avis ... ",
+                "mhr_response": "Cher Bertrand, \nMerci de souligner la propreté irréprochable à bord du Best Western Hôtel St Exupéry Bordeaux Ouest 3*. \nNous nous excusons pour cet incident survenu ce week-end et désormais résolu. \nNous aurions pu vous proposer un chauffage d’appoint sur simple demande à la réception. Concernant la caution de 50€, il s'agit d'une empreinte bancaire prise à l'arrivée de nos hôtes pour les potentiels extras qui seraient consommés pendant votre séjour. Cette dernière est rendue en fin de séjour s’il n'y a pas eu de consommation. Cette somme n'est pas débitée et j'ai vérifié moi-même à la suite de votre retour en réception. \nNous espérons néanmoins que vous avez apprécié votre passage à Bordeaux et que nous aurons l'occasion de vous revoir pour une escale sans nuages. \nLaura Barthez \nDirectrice Best Western Hôtel St Exupéry Bordeaux Ouest 3*"
+            },
+            {
+                "response_author": "Agathe - Chargée de Relation Client",
+                "establishment_name": "Château de Montvillargenne - 03 44 62 37 37",
+                "global_context": "Ajouter le nom de l'établissement en fin de réponse.\nAvis laissé sur TripAdvisor.\nUn grand programme de transformation permettra une réouverture de ces espaces au printemps 2023 avec une décoration plus contemporaine.\nNos masseurs sont des personnes hommes ou femmes, professionnelles et sérieuses, avec une déontologie, tous formés aux massages mixtes.\nNous avons une politique d’annulation claire et précise, nous avons tenté de vous trouver une solution que vous avez refusée.",
+                "local_context": "",
+                "season_greeting": false,
+                "review_author": "Smith C",
+                "review": "Attention ! Surtout n’y allez pas. Les prestations ne sont pas du tout à la hauteur de ce qui est marqué sur le site internet. \nLa salle de fitness est vielle avec des machines non fonctionnelles ou cassé. Même Pas de place au restaurant pour les gens de l’hôtel . Le sona est tout petit et on est obligé de s’entasser dedans . Le hammam ne fonctionne pas  . Pour les massages surtout ne le prenez pas ! Ils vous le facture même si vous annulez car vous ne pouvez pas choisir entre un homme et une femme . En bref le SPA est une arnaque et non existant ! \nSeul chose peut être positive c’est peut être  le petit déjeuner qui n’est pas mauvais.",
+                "mhr_response": "Cher monsieur Smith,\n\nJe vous remercie d’avoir pris le temps de laisser un commentaire sur TripAdvisor et Google, cela me permet de donner plus détails à nos lecteurs.\n\nEn effet, nous souhaitons ici pondérer vos commentaires :\n\nEn ce qui concerne notre restaurant, ce dernier offre une capacité de 80 couverts. C’est pourquoi dès nos premiers échanges, Émilie, en charge des réservations, vous a invité à faire une réservation de table. Toutefois, si le restaurant est complet, il est possible de dîner avec une carte plus légère d’inspiration brasserie dans notre Bar le James Edouard ou en service en chambre.\n\nNous pouvons tout à fait comprendre que la décoration de notre salle de Gym ne vous convienne pas. D’ailleurs, un grand programme de transformation permettra une réouverture de ces espaces au printemps 2023 avec une décoration plus contemporaine.\nVous êtes malheureusement tombé sur la seule machine hors service parmi un choix de plus d’une vingtaine d'appareils de la marque Technogym. La mise à l’arrêt de cette machine est d'ailleurs précisée par un affichage.\n\nEn ce qui concerne les massages, nos masseurs sont des personnes hommes ou femmes, professionnelles et sérieuses, avec une déontologie, tous formés aux massages mixtes.\nNous avons à cœur au château de Montvillargenne de combler les souhaits de nos clients. C’est ce que nous avons fait en vous proposant de changer de masseur, malgré les propos diffamatoires et choquants que vous avez tenus devant nos équipes.\n\nNous avons une politique d’annulation claire et précise, nous avons tenté de vous trouver une solution que vous avez refusée. Nous avons tout de même fait un geste commercial à la hauteur du prix du massage.\n\nEncore merci d’avoir relevé que notre petit-déjeuner était complet et de qualité. Je vous invite à revenir essayer notre Spa dès sa réouverture au printemps pour un séjour plus apaisé qui vous comblera en tout point.\n\nAgathe - Chargée de Relation Client\nChâteau de Montvillargenne\n03 44 62 37 37"
+            },
+            {
+                "response_author": "Frédérique Hanssens, directrice",
+                "establishment_name": "Best Western Plus Hôtel Le Conquérant",
+                "global_context": "",
+                "local_context": "",
+                "season_greeting": false,
+                "review_author": "KLC",
+                "review": "Hôtel très exelent,\nChambre spacieuse, confortable et très propre.\nOn entent aucun bruit\nPersonnel accueillant et chaleureux et à l'écoute",
+                "mhr_response": "Cher Hôte, \n\nVotre partage d’expérience est notre plus belle récompense. \nNous avons la chance d'avoir un établissement très récent où tout a été pensé pour que vous passiez un agréable moment avec des chambres spacieuses, cosy au calme pour une étape des plus sereine. \nJe suis ravie de lire que vous avez apprécié l'accueil et la sympathie de nos équipes. Nous aimons être aux petits soins pour nos hôtes. \nNous sommes heureux d'avoir participé à la réussite de votre séjour normand et nous vous attendons les bras ouverts pour en profiter à nouveau. \n\nFrédérique Hanssens, \nDirectrice, Best Western Plus Hôtel Le Conquérant \n02 78 26 12 60"
+            },
+            {
+                "response_author": "Marc-Henri Courtade, directeur",
+                "establishment_name": "La Table de Varennes",
+                "global_context": "La carte change au fil des saisons.\nSur simple demande, il est possible de renvoyer l'assiette pour adapter la cuisson",
+                "local_context": "",
+                "season_greeting": false,
+                "review_author": "Marcel Michot",
+                "review": "un peu déçu, peu de choix, ce qui peut se comprendre, car ils privilégient le frais et le tout maison.Nous avons opté pour le duo de cabillaud sur velouté de poireaux, or le poisson était à peine cuit, et les poireaux également, très craquants.",
+                "mhr_response": "Cher Monsieur,\n\nMerci d'avoir choisi notre établissement pour votre repas à Varennes-Jarcy.\n\nVous avez raison de souligner que notre cuisine est fraîche et faite maison, ce qui a pour contrepartie de limiter le choix. Notre carte change toutefois au fil des saisons, et vous pourrez revenir découvrir de nouvelles saveurs pour vivre une autre expérience.\n\nJe suis navré que la cuisson des plats ne vous ait pas convenu. Sur simple demande, vous pouvez faire renvoyer votre assiette pour adapter la cuisson de votre poisson ou de vos légumes selon votre goût.\n\nÀ bientôt dans notre cadre bucolique et arboré,\n\nMarc-Henri Courtade\nDirecteur La Table de Varennes\n01 69 00 53 87"
+            }
+        ]
+    </script>
+
+    <script>
+        /* Replace NL to <BR> */
+        function nl2br(str, is_xhtml) {
+            if (typeof str === 'undefined' || str === null) {
+                return '';
+            }
+            var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+            return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+        }
+    </script>
+    <script>
+        /* Fill input with values from mhr_review */
+        function add_mhr_review(event) {
+            idx = event.target.value;
+            if (idx == -1) {
+                empty_fields()
+                return
+            }
+            /* Don't add context but empty it */
+            document.getElementById("context").innerHTML = "";
+            document.getElementById("response_author").value = mhr_review[idx]['response_author'];
+            document.getElementById("est_name").value = mhr_review[idx]['establishment_name'];
+            document.getElementById("review_author").value = mhr_review[idx]['review_author'];
+            document.getElementById("avis").value = mhr_review[idx]['review'];
+            document.getElementById("response_author").value = mhr_review[idx]['response_author'];
+            document.getElementById("mhr_response").innerHTML = nl2br(mhr_review[idx]['mhr_response']);
+        }
+    </script>
+    <script>
+        /* Empty all field */
+        function empty_fields() {
+            document.getElementById("context").innerHTML = "";
+            document.getElementById("response_author").value = "";
+            document.getElementById("est_name").value = "";
+            document.getElementById("review_author").value = "";
+            document.getElementById("avis").value = "";
+            document.getElementById("response_author").value = "";
+            document.getElementById("mhr_response").innerHTML = "";
+        }
+    </script>
+    <script>
+        /* Add MHR context */
+        function add_mhr_context() {
+            const idx = document.getElementById("mhr_select").value;
+            if (!idx) {
+                return;
+            }
+            document.getElementById("context").innerHTML = nl2br(mhr_review[idx]['global_context']);
+        }
+    </script>
+    <script>
+        /* Add listeners after page loading complete */
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("generate").addEventListener("click", add_response);
+            document.getElementById("clear").addEventListener("click", clear_responses);
+            document.getElementById("add_context").addEventListener("click", add_mhr_context);
+            document.querySelector('#mhr_select').addEventListener('change', add_mhr_review);
+            add_mhr_options()
+        });
+    </script>
+
+    <script>
+        /* Create dropdown for reviews with MHR options */
+        function add_mhr_options() {
+            const sel = document.getElementById("mhr_select")
+            for (idx = 0; idx < mhr_review.length; idx++) {
+                const opt = document.createElement("option");
+                opt.value = idx;
+                opt.text = mhr_review[idx]['establishment_name'];
+                sel.add(opt, null);
+            }
+        }
+    </script>
+    <script>
+        /* Call API and display the response */
+        function gpt_api(data) {
+            document.getElementById("wait_for_api").style.display = "block"
+            document.getElementById("generate").style.display = "none"
+
+            const options = {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Accept': 'application/json',
+                    "Content-Type": "application/json"
+                }
+            };
+
+            fetch("http://tmapsbuilder1.rc.prod:8800/", options)
+                .then((response) => response.json())
+                .then((data) => {
+                    document.getElementById("wait_for_api").style.display = "none"
+                    document.getElementById("generate").style.display = "block"
+                    display_response(data['response'])
+                })
+                .catch((err) => {
+                    alert("Problème avec fetch : " + err.message);
+                });
+        }
+    </script>
+
+    <script>
+        /* Append response to the DOM */
+        function display_response(response_text) {
+            const response = document.getElementById("response");
+            const div = document.createElement("div");
+            div.classList.add('response-text');
+            //div.innerHTML += nl2br(response_text);
+            response.appendChild(div);
+
+
+            // Animate the text
+            var i = 0;
+
+            // Function to generate a random time interval between a range of values
+            function randomIntFromInterval(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) + min)
+            }
+
+            // TypeWriter effect.
+            function typeWriter(){
+                if (i < response_text.length){
+                    while (response_text.charAt(i) === '\n' && i !== 0){
+                        div.innerHTML += '<br>';
+                        i++;
+                    }
+                    div.innerHTML += response_text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, randomIntFromInterval(0, 150));
+                }
+            }
+            typeWriter();
+
+        }
+    </script>
+
+    <script>
+        /* Add response by calling API */
+        function add_response() {
+            /* Retrieve data from DOM */
+            const data = {
+                "response_author": document.getElementById("response_author").value,
+                "establishment_name": document.getElementById("est_name").value,
+                "global_context": document.getElementById("context").value,
+                "local_context": "Répondre à cet avis de façon " + document.querySelector('input[name="tone"]:checked').value + ".",
+                "season_greeting": false,
+                "review_author": document.getElementById("review_author").value,
+                "review": document.getElementById("avis").value,
+            };
+            /* call API */
+            gpt_api(data)
+        }
+    </script>
+
+    <script>
+        /* Remove responses from the DOM */
+        function clear_responses() {
+            document.getElementById("response").innerHTML = ""
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>POC GPT-3 pour FairGuest</h1>
+        <div class="review_response">
+            <!-- Writing review section -->
+            <section>
+                <select name="mhr_select" id="mhr_select">
+                    <option value="-1">Selection d'un avis avec une réponse</option>
+                </select>
+                <h2>Avis Client</h2>
+                <input type="text" id="review_author" placeholder="Nom du vacancier">
+                <textarea id="avis" name="review" rows="5" cols="50" placeholder="Avis"></textarea>
+
+                <div class="nav">
+                    <h2>Contexte</h2>
+                    <div><button id="add_context">Ajouter le contexte</button></div>
+                </div>
+                <input type="text" id="est_name" placeholder="Nom de l'établissement">
+                <input type="text" id="response_author" placeholder="Nom rédacteur de la réponse">
+                <textarea id="context" name="contexte" rows="5" cols="50" placeholder="Contexte"></textarea>
+                <p><b>Type de réponse</b>&nbsp;
+
+                    <input type="radio" name="tone" class="tone" id="keen">
+                    <label for="keen">enthousiaste</label>
+
+                    <input type="radio" name="tone" class="tone" id="annoyed">
+                    <label for="annoyed">agacée</label>
+
+                    <input type="radio" name="tone" class="tone" id="sarcastic">
+                    <label for="sarcastic">sarcastique</label>
+
+                    <input type="radio" name="tone" class="tone" id="caring" checked>
+                    <label for="caring">bienveillante</label>
+                </p>
+
+                <div id="wait_for_api"></div>
+                <button id="generate">Générer une réponse</button>
+                <h2>Réponse faite par un humain</h2>
+                <div id="mhr_response"></div>
+            </section>
+
+            <!-- Response section -->
+            <section class="response_section">
+                <div class="nav">
+                    <h2>Réponse GPT</h2>
+                    <div><button id="clear">Effacer</button></div>
+                </div>
+                <div id="response"></div>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>
