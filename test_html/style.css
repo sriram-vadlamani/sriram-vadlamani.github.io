@@ -15,12 +15,21 @@ img {
   display: flex;
   flex-direction: column;
   border: 1px solid lightblue;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.cv_box:before {
+    content: "";
+    border: 1px solid grey;
+    align-self: stretch;
 }
 
 .personal_details {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  order: -1
 }
 
 .summary {
