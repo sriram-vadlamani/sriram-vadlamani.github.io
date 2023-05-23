@@ -1,6 +1,7 @@
 html,body{
     height:297mm;
     width:220mm;
+    margin: 1em;
 }
 
 img {
@@ -14,7 +15,7 @@ img {
 .cv_box {
   display: flex;
   flex-direction: column;
-  border: 1px solid lightblue;
+  /*border: 1px solid lightblue;*/
   justify-content: space-between;
   gap: 10px;
 }
