@@ -1,548 +1,187 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Data scientist" />
-    <meta name="keywords" content="resume,cv,Sriram vadlamani" />
-    <meta name="author" content="Sriram Vadlamani" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="preload"
-      href="./fonts/Jost-Medium.woff2"
-      as="font"
-      crossorigin="anonymous"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    
-    <link href="./build.css" rel="stylesheet" />
-    <title>Sriram Vadlamani — Resume</title>
-  </head>
-<!-- Body ----------------------------------------------------------------------- -->
-  <body class="bg-hero-zig-zag">
-    <main class="font-jost hyphens-manual">
-      <!-- Page -------------------------------------------------------------------------------------------------------->
-      <section
-        class="max-w-3xl p-3 mx-auto my-auto bg-gray-100 border-4 border-gray-700 print:border-0 page print:max-w-letter print:max-h-letter print:mx-0 print:my-o lg:h-letter md:max-w-letter md:h-letter xsm:p-8 sm:p-9 md:p-16 lg:mt-6 rounded-2xl print:bg-white"
-      >
-        <!-- Name ---------------------------------------------------------------------------------------------------->
-        <header
-          class="inline-flex items-baseline justify-between w-full mb-2 align-top border-b-4 border-gray-300"
-        >
-          <section class="block">
-            <h1 class="mb-0 text-5xl font-bold text-gray-700">
-              Sriram Vadlamani  
-            </h1>
-            <!--Job Title--------------------------------------------------------------------------------------------------------->
-            <h2
-              class="m-0 ml-2 text-2xl font-semibold text-gray-700 leading-snugish"
-            >
-              Data Scientist  
-            </h2>
-            <!--Location --------------------------------------------------------------------------------------------------------->
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
 
-            <h3
-              class="m-0 mt-2 ml-2 font-semibold text-lg text-gray-500 leading-snugish"
-            >
-              La Rochelle, France
-            </h3>
-          </section>
-          <!--   Initials Block         -->
-          <section
-              class "justify-between px-3 mt-0 mb-5 text-4xl font-bold leading-none text-white initials-container bg-gray-700 print:bg-black" 
-            style="padding-bottom: 0.5rem; padding-top: 0.5rem;"
-          >
-            <img src="sriram_cv_dp.jpeg" alt="" width=150 height=150>
-          </section>
-        </header>
+    <!-- 
+      TODO
 
-        <!-- Column -------------------------------------------------------------------------------------------------->
-        <section
-          class=" col-gap-8 md:col-count-2 print:col-count-2 md:h-letter-col-full print:h-letter-col-full col-fill-balance"
-        ><section class="flex-col">
-          <!-- Contact Information ------------------------------------------------------------------------------------->
-          <section class="pb-2 mb-0 mt-4 first:mt-0">
-            <!-- To keep in the same column -------------------------------------------------------------------------->
-            <section class="break-inside-avoid">
-              <section class="pb-4 mb-2 border-b-4 border-gray-300 break-inside-avoid">
-                <ul class="list-inside pr-7">
-                  <li
-                    class="mt-1 leading-normal transition duration-100 ease-in text-gray-500 text-md hover:text-gray-700"
-                  >
-                    <a href="https://github.com/sriram-vadlamani" class="group">
-                      <span
-                        class="mr-5 text-lg font-semibold text-gray-700 leading-snugish"
-                      >
-                        Github:
-                      </span>
-                      sriram-vadlamani
-                      <span
-                        class="inline-block font-normal text-black transition duration-100 ease-in text-gray-500 print:text-black group-hover:text-gray-700 print:"
-                      >
-                        ↗
-                      </span>
-                    </a>
-                  </li>
+      Upload your Unemployable (or whatever photo you like) to the assets/images folder
+      and change the name of the image below to match the uploaded one
 
-                  <li
-                    class="mt-1 leading-normal transition duration-100 ease-in text-gray-500 text-md hover:text-gray-700"
-                  >
-                    <a href="mailto:sriram.vadlamani@proton.me" class="group">
-                      <span
-                        class="mr-8 text-lg font-semibold text-gray-700 leading-snugish"
-                      >
-                        Email:
-                      </span>
-                      sriram.vadlamani@proton.me
-                      <span
-                        class="inline-block font-normal transition duration-100 ease-in text-gray-500 print:text-black group-hover:text-gray-700"
-                      >
-                        ↗
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="mt-1 leading-normal transition duration-100 ease-in text-gray-500 text-md hover:text-gray-700"
-                  >
-                    <a href="tel:+33755312013">
-                      <span
-                        class="mr-5 text-lg font-semibold text-gray-700 leading-snugish"
-                      >
-                        Phone:
-                      </span>
-                      +33 7 55 31 20 13
-                    </a>
-                  </li>
-                </ul>
-              </section>
-            </section>
-          </section>
-          <!--Summary ---------------------------------------------------------------------------------------------------------->
-          <section class="pb-2 pb-4 mt-0 border-b-4 border-gray-300 first:mt-0">
-            <!-- To keep in the same column -->
-            <section class="break-inside-avoid">
-              <h2
-                class="mb-2 text-xl font-bold tracking-widest text-gray-700 print:font-normal"
-              >
-                SUMMARY
-              </h2>
+      Change the title in the <title> tag to whatever you would like the title of your portfolio to be
 
-              <section class="mb-2 break-inside-avoid">
-                <p class="mt-2 leading-normal text-gray-700 text-md">
-                  A data scientist and a developer with demonstrable capacity in developing and deploying artificial intelligence models with state of the art generative technologies and making AI accessible to learn and utilise for growing business needs. 
-                </p>
-              </section>
-            </section>
-          </section>
+      This should be the same across all pages.
+     -->
+    <link rel="icon" href="./assets/images/1311.png" />
+		<title>Unemployables Portfolio</title>
+    <meta name="description" content="A portfolio template for the Unemployables community.">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-             <!--Education -------------------------------------------------------------------------------------------------------->
-             <section class="pb-0 break-inside-avoid mt-2 border-b-4 border-gray-300 first:mt-0">
-              <!-- To keep in the same column -->
-              <section class="break-inside-avoid">
-                <h2
-                  class="mb-2 text-lg font-bold tracking-widest text-gray-700 print:font-normal"
-                >
-                  EDUCATION
-                </h2>
-                <!-- school --------------------------------------------------------------------------->
-                <section class="mt-2  border-b-2 break-inside-avoid">
-                  <header>
-                    <h3
-                      class=" text-lg font-semibold text-gray-700 leading-snugish"
-                    >
-                      Msc. Data Science
-                    </h3>
-                    <p class="leading-normal text-md text-gray-500">
-                    2022 &ndash; Present | Openclassrooms (with Centrale Supélec) <br>
-                      La Rochelle, France
-                    </p>
-                  </header>
-                </section>
-                <!--school 2--------------------------------------------------------------------------------------------->
-                <section class="pb-4 mt-4 mb-4 border-b-2 break-inside-avoid">
-                  <header>
-                    <h3
-                      class="flex-grow text-lg font-semibold text-gray-700 leading-snugish"
-                    >
-                      Bsc. Computer Science
-                    </h3>
-                    <p class="leading-normal text-md text-gray-500">
-                    2018 &ndash; 2021 | EPITA <br>
-                      Paris, France
-                    </p>
-                  </header>
-                  <p class="mt-1 leading-normal text-md text-gray-800">
-                    <span
-                      class="font-semibold text-gray-700 text-md leading-snugish"
-                    >
-                      Major:
-                    </span>
-                    Data structures, algorithms, math and system architecture
-                  </p>
-                  <p class="mt-1 leading-normal text-md text-gray-800"></p>
-                  <p class="leading-normal text-gray-700 text-md">
-                    <span
-                      class="font-semibold text-gray-700 text-md leading-snugish"
-                    >
-                      GPA:
-                    </span>
-                    3.5
-                  </p>
-                </section>
-  
-                <!--school 3 --------------------------------------------------------------------------------->
-                <section class="pb-4 mt-4 mb-4 break-inside-avoid">
-                  <header>
-                    <h3
-                      class="flex-grow text-lg font-semibold text-gray-700 leading-snugish"
-                    >
-                      High School Diploma
-                    </h3>
-                    <p class="leading-normal text-md text-gray-500">
-                    2017 | Indus Universal School <br>
-                      Hyderabad, India
-                    </p>
-                  </header>
-                  <p class="mt-1 leading-normal text-md text-gray-800">
-                    <span
-                      class="font-semibold text-gray-700 text-md leading-snugish"
-                    >
-                      Major:
-                    </span>
-                    Maths, Science and Programming
-                  </p>
-                  <p class="mt-1 leading-normal text-md text-gray-800"></p>
-                  <p class="leading-normal text-gray-700 text-md">
-                    <span
-                      class="font-semibold text-gray-700 text-md leading-snugish"
-                    >
-                      GPA:
-                    </span>
-                    4
-                  </p>
-                </section>
-              </section>
-            </section>
-          
-            <!--Begin Skills ----------------------------------------------------------------------------------------------------->
-            <section class="pb-6 mb-4 mt-0 first:mt-0 break-inside-avoid border-b-4 border-gray-300 ">
-              <!-- To keep in the same column -->
-              <section class="break-inside-avoid">
-                <h2
-                  class="mb-2 text-lg font-bold tracking-widest text-gray-700 print:font-normal"
-                >
-                  SKILLS
-                </h2>
-                <section class="mb-0 break-inside-avoid">
-                  <section class="mt-1 last:pb-1">
-                    <ul
-                      class="flex flex-wrap text-md leading-relaxed -mr-1.6 -mb-1 font-bold"
-                    >
-                      <li
-                        class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                      >
-                        APIs
-                      </li>
-                      <li
-                        class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                      >
-                        Tensorflow
-                      </li>
-                      <li
-                        class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                      >
-                        Pytorch
-                      </li>
-                      <li
-                      class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                    >
-                      Prompt Engineering
-                    </li>
-                    <li
-                    class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                  >
-                    Containerization
-                  </li>
-                    
-                    <li
-                      class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                    >
-                      CI/CD
-                    </li>
-                    <li
-                    class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                  >
-                    Temporal
-                  </li>
+		<link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/typography.css">
+    <link rel="stylesheet" href="./css/utilities.css">
 
-                  <li
-                  class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                >
-                    Python
-                  </li>
-                  <li
-                  class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                >
-Tableau
-              </li>
-                
-                    
-                    <li
-                      class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                    >
-                      AWS
-                    </li>
-                    <li
-                      class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                    >
-                      Linux
-                    </li>
-                      <li
-                        class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                      >
-                        Go
-                      </li>
-  
-                      <li
-                        class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                      >
-                        Statistics
-                      </li>
-                      <li
-                        class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                      >
-                        MongoDB
-                      </li>
-                      <li
-                      class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                    >
-                      NoSQL
-                    </li>
-                      <li
-                        class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                      >
-                        MySQL
-                      </li>
-                      <li
-                      class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                    >
-                      Kubernetes
-                    </li>
-                      <li
-                      class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                    >
-                      REST
-                    </li>
-                    <li
-                    class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                  >
-                    EDA
-                  </li>
-  
-                      </ul>
-                  </section>
-                </section>
-                </section>
-              </section>
-          <!--Experience ------------------------------------------------------------------------------------------------------>
-          <section class="pb-2 pb-4 mt-4 border-b-4 border-gray-300 first:mt-0">
-            <!-- To keep in the same column ------------------------------------------------------------------------->
-            <section class="break-inside-avoid">
-              <h2
-                class="mb-2 text-xl font-bold tracking-widest text-gray-800 print:font-normal"
-              >
-                EXPERIENCE
-              </h2>
-              <!--Job 1-->
-              <section class="mb-2 break-inside-avoid border-b-2 border-gray-300">
-                <header>
-                  <h3
-                    class="text-md font-semibold text-gray-800 leading-snugish "
-                  >
-                    Data scientist
-                  </h3>
-                  <p class="leading-normal text-sm text-gray-500">
-                    Jul 2022 &ndash; Present | Raccourci Agency
-                  </p>
-                </header>
-                <ul class="mt-2 font-normal text-md  text-gray-700 leading-snugish pl-3">
-                <li>
-                    <span
-                      class="transform -translate-y-px select-none text-gray-500"
-                    >
-                      &rsaquo;
-                    </span>
-                    Analysing user reviews to model topics and sentiment using cutting edge NLP and generative NLP models. Training and deploying text topic models with CI/CD.
-                  </li>
-                  <li>
-                    <span
-                      class="transform -translate-y-px select-none text-gray-500"
-                    >
-                      &rsaquo;
-                    </span>
-                     Developping an application with temporal from scratch with Go and python. Containerization of AI microservices with temporal workflows. Understanding customer needs for sustainable tourism.
-                  </li>
-                  <li>
-                    <span
-                      class="transform -translate-y-px select-none text-gray-500"
-                    >
-                      &rsaquo;
-                    </span>
-                     Implemented efficient workflows. Adapted newly researched NLP solutions for efficient natural language processing.
-                  </li>
-           
-                </ul>
-              </section>
-            <!-- job 2  -->
-              <section class="mb-2 break-inside-avoid border-b-2 border-gray-300">
-                <header>
-                  <h3
-                    class="text-md font-semibold text-gray-800 leading-snugish"
-                  >
-                    Data analyst
-                  </h3>
-                  <p class="leading-snugish text-sm text-gray-500">
-                    Sep 2021 &ndash; March 2022 | Freelance
-                  </p>
-                </header>
-                <ul class="mt-2 font-normal text-md  text-gray-700 leading-snugish pl-3">
-                  <li>
-                    <span
-                      class="transform -translate-y-px select-none text-gray-500"
-                    >
-                      &rsaquo;
-                    </span>
-                     Provided freelance data consultancy for clients in need. Understood different clientele and their needs to make most out of the given time and deadlines.
-                  </li>
-                  <li>
-                    <span
-                      class="transform -translate-y-px select-none text-gray-500"
-                    >
-                      &rsaquo;
-                    </span>
-                     Demonstrated expertise in understanding data sources, KPIs and creating dashboards with Tableau. Managing resources to make dashboards minimal and deployable.
-                  </li>
-                  <li>
-                    <span
-                      class="transform -translate-y-px select-none text-gray-500"
-                    >
-                      &rsaquo;
-                    </span>
-                    Offered customized solutions to clients, including data driven solutions and data modelling.
-                  </li>
-              
-         
-                </ul>
-              </section>
-            <!-- job 3 -->
-            <section>
-              <header>
-                <h3
-                  class="text-md font-semibold text-gray-800 leading-snugish"
-                >
-                  Data analyst (intern)
-                </h3>
-                <p class="leading-snugish text-sm text-gray-500">
-                  Jun 2019 &ndash; Aug 2019 | FutureSwift technologies
-                </p>
-              </header>
-              <ul class="mt-2 font-normal text-md  text-gray-700 leading-snugish pl-3">
-                <li>
-                  <span
-                    class="transform -translate-y-px select-none text-gray-500"
-                  >
-                    &rsaquo;
-                  </span>
-                   Scraped and collected website performance data with google lighthouse.
-                </li>
-                <li>
-                  <span
-                    class="transform -translate-y-px select-none text-gray-500"
-                  >
-                    &rsaquo;
-                  </span>
-                   Performed an exploratory analysis and data cleaning.
-                </li>
-    
-                <li>
-                  <span
-                    class="transform -translate-y-px select-none text-gray-500"
-                  >
-                    &rsaquo;
-                  </span>
-                   Created visualizations appropriate for the findings from the given data.
-                </li>
-              </ul>
-            </section>
-            </section>
-          </section>
-          <section class="pb-6 mb-4 mt-0 first:mt-0 break-inside-avoid border-b-4 border-gray-300 ">
-              <!-- To keep in the same column -->
-              <section class="break-inside-avoid">
-                <h2
-                  class="mb-2 text-lg font-bold tracking-widest text-gray-700 print:font-normal"
-                >
-                  HOBBIES AND INTERESTS
-                </h2>
-                <section class="mb-0 break-inside-avoid">
-                  <section class="mt-1 last:pb-1">
-                    <ul
-                      class="flex flex-wrap text-md leading-relaxed -mr-1.6 -mb-1 font-bold"
-                    >
-                      <li
-                        class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                      >
-                        Guitar
-                      </li>
-                      <li
-                        class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                      >
-                        Chess
-                      </li>
-                      <li
-                        class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                      >
-                        Films
-                      </li>
-                      <li
-                      class="p-1.5 mr-1.6 mb-1 text-white leading-relaxed print:bg-white print:border-inset bg-gray-800"
-                    >
-                      Screenwriting
-                    </li>
-                  </section>
-                </section>
-                </section>
-              </section>
-        </section>
-        <section class="pb-6 mb-4 mt-0 first:mt-0 break-inside-avoid border-b-4 border-gray-300 ">
-              <!-- To keep in the same column -->
-              <section class="break-inside-avoid">
-                <h2
-                  class="mb-2 text-lg font-bold tracking-widest text-gray-700 print:font-normal"
-                >
-                  LANGUAGES
-                </h2>
-                <section class="mb-0 break-inside-avoid">
-                   <ol type="1">
-                    <li> English: Native or bilingual proficiency </li>
-                     <li>French: Professional working proficiency</li>
-                     <li>Hindi: Native or bilingual proficiency</li>
-                     <li>Telugu: Native or bilingual proficiency</li>
-                </section>
-                </section>
-              </section>
-        </section>
-        <!-- end Column -->
-      </section>
-      <!-- end Page -->
-    </main>
-  </body>
+		<script defer src="./js/script.js"></script>
+	</head>
+	<body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+      <a class="nav-title-link" href="./index.html">
+        <!-- TODO - Change the "Portfolio Title" to whatever you want displayed in the top left -->
+        <span class="nav-title">Portfolio Title</span>
+         <!-- TODO - Change the email after 'mailto:' to your email address for contact -->
+        <a class="button" href="mailto:whitevans.eth@gmail.com">
+          <span class="button-text">Contact Me</span>
+        </a>
+      </a>
+    </div>
+
+    <!-- MAIN PAGE CONTENT -->
+    <div id="main-content">
+
+      <!-- PORTFOLIO HEADER -->
+      <div id="portfolio-header">
+        <div id="portfolio-header-image-container">
+          <!-- 
+            TODO
+
+            - Change the img "src" attribute to point to the Unemployable image you uploaded (or whatever image).
+            - Change the number to point to your Unemployable & replace the OpenSea link with your own
+            - If you aren't using an Unemployable as your image, remove the entire "a" element
+          -->
+          <img src="./assets/images/1311.png" class="portfolio-header-image">
+          <a class="no-underline" target="_blank" href="https://opensea.io/assets/0xe0be388ab81c47b0f098d2030a1c9ef190691a8a/1311">
+            <span class="image-caption">Unemployables #1311</span>
+          </a>
+        </div>
+
+          <!-- 
+            TODO
+
+            - Change the main-title to whatver you want
+            - Change the body-text after that to a quick introduction to what you do
+            - Edit the button text if you feel like it. It will link to the projects section below.
+          -->
+        <div id="portfolio-header-text-container">
+            <div class="header-text">
+              <span class="main-title">Hey, I'm @ndoherty_eth.</span>
+              <div class="body-text">I’m a freelance designer and developer who aims to help other creatives build out their portfolios, skillset, and businesses.</div>
+            </div>
+            <a class="button" id="my-work-link">
+              <span class="button-text">Check out my projects</span> 
+              <image src="./assets/icons/arrow-right.svg" class="right-arrow-icon"/>
+            </a>
+        </div>
+      </div>
+
+      <!-- ABOUT SECTION -->
+      <!-- 
+        TODO
+
+        - Change the subheader-text to whatever header you want
+        - Add paragraphs using the <div class="body-text"></div> elements in the "about-section-content"
+      -->
+      <div id="about-section">
+        <span class="subheader-text">My Background / About Me</span>
+        <div class="about-section-content">
+          <div class="body-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique risus nec feugiat in fermentum. Sed id semper risus in hendrerit gravida. Placerat duis ultricies lacus sed. Id neque aliquam vestibulum morbi blandit cursus risus. Elit pellentesque habitant morbi tristique senectus et netus et. Elementum tempus egestas sed sed risus pretium quam. Nibh ipsum consequat nisl vel pretium lectus quam id leo. Vitae congue mauris rhoncus aenean vel elit.</div>
+          <div class="body-text">Vitae justo eget magna fermentum. Imperdiet nulla malesuada pellentesque elit eget gravida. Aliquet nec ullamcorper sit amet. Aliquet sagittis id consectetur purus. Ac tortor dignissim convallis aenean. Enim neque volutpat ac tincidunt vitae. Lobortis feugiat vivamus at augue. Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Viverra orci sagittis eu volutpat. Massa tincidunt nunc pulvinar sapien et ligula. Donec enim diam vulputate ut.</div>
+        </div>
+      </div>
+
+      <!-- PROJECTS / MY WORK SECTION -->
+      <div id="my-work-section">
+        <!-- TODO - Change the subheader-text to whatever you want the Projects section header to say -->
+        <span class="subheader-text">My Work / My Projects</span>
+
+        <div class="projects-container">
+          <!-- 
+            TODO
+
+            This is where the project cards live. Here's a base level project card for you to copy:
+            <div class="project-card">
+              <img src="./assets/images/IMAGE_NAME" class="project-image">
+              <div class="project-card-text-container">
+                <div class="subheader-text project-title">PROJECT_NAME</div>
+                <div class="body-text project-card-text">SMALL_PROJECT_DESCRIPTION</div>
+              </div>
+              <a class="button" href="./project-pages/PROJECT_PAGE_NAME.html">
+                <span class="button-text">Read More</span>
+                <image src="./assets/icons/arrow-right.svg" class="right-arrow-icon"/>
+              </a>
+            </div>
+
+            - To add a project to the this area, copy the above, paste it below this comment, and change the following:
+                - IMAGE_NAME: the name of the image file in assets/images
+                - PROJECT_NAME: the name of the project (keep it short, it only shows 1 line)
+                - SMALL_PROJECT_DESCRIPTION: a quick project description (max 4 lines)
+                - PROJECT_PAGE_NAME.html: the html filename for the project (must be in project-pages folder)
+          -->
+          <div class="project-card">
+            <img src="./assets/images/desktop.jpeg" class="project-image">
+            <div class="project-card-text-container">
+              <div class="subheader-text project-title">Project Name</div>
+              <div class="body-text project-card-text">Elit pellentesque habitant morbi tristique senectus et netus et. Elementum tempus egestas sed sed risus pretium quam. Nibh ipsum consequat nisl vel pretium</div>
+            </div>
+            <a class="button" href="./project-pages/project-template.html">
+              <span class="button-text">Read More</span>
+              <image src="./assets/icons/arrow-right.svg" class="right-arrow-icon"/>
+            </a>
+          </div>
+          <div class="project-card">
+            <img src="./assets/images/code.jpeg" class="project-image">
+            <div class="project-card-text-container">
+              <div class="subheader-text project-title">Project Name</div>
+              <div class="body-text project-card-text">Elit pellentesque habitant morbi tristique senectus et netus et. Elementum tempus egestas sed sed risus pretium quam. Nibh ipsum consequat nisl vel pretium</div>
+            </div>
+            <a class="button" href="./project-pages/project-template.html">
+              <span class="button-text">Read More</span>
+              <image src="./assets/icons/arrow-right.svg" class="right-arrow-icon"/>
+            </a>
+          </div>
+          <div class="project-card">
+            <img src="./assets/images/sketchbook.jpeg" class="project-image">
+            <div class="project-card-text-container">
+              <div class="subheader-text project-title">Super Long Project Name That Should be Hidden</div>
+              <div class="body-text project-card-text">Elit pellentesque habitant morbi tristique senectus et netus et. Elementum tempus egestas sed sed risus pretium quam. Nibh ipsum consequat nisl vel pretium</div>
+            </div>
+            <a class="button" href="./project-pages/project-template.html">
+              <span class="button-text">Read More</span>
+              <image src="./assets/icons/arrow-right.svg" class="right-arrow-icon"/>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer">
+      <!-- 
+        TODO - Change href to your Instagram account (can also delete entire "a" element if no Instagram) 
+
+        This should be the same across all pages.
+      -->
+      <a class="icon-link" target="_blank" href="https://twitter.com/whitevans_eth">
+        <image src="./assets/icons/instagram.svg" class="footer-icon"/>
+      </a>
+      <!-- 
+        TODO - Change href to your Twitter account (can also delete entire "a" element if no Twitter) 
+      
+        This should be the same across all pages.
+      -->
+      <a class="icon-link" target="_blank" href="https://twitter.com/whitevans_eth">
+        <image src="./assets/icons/twitter.svg" class="footer-icon"/>
+      </a>
+      <!-- 
+        TODO - Change the email after "mailto" to your contact email 
+      
+        This should be the same across all pages.
+      -->
+      <a class="icon-link" href="mailto:whitevans.eth@gmail.com">
+        <image src="./assets/icons/mail.svg" class="footer-icon"/>
+      </a>
+    </div>
+
+	</body>
 </html>
